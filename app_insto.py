@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sequoia Capital Management - Institutional AUM Consolidation Tool
+Sequoia Investment Solutions - Institutional AUM Consolidation Tool
 Backend server for processing 27Four institutional data files
 """
 
