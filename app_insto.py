@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sequoia Investment Solutions - Institutional AUM Consolidation Tool
+Sequoia Capital Management - Institutional AUM Consolidation Tool
 Backend server for processing 27Four institutional data files
 """
 
@@ -178,6 +178,17 @@ def process_27four_data(file_bytes, template_data, mapping_data, report_date, us
             return {
                 'success': False,
                 'error': f'Missing required columns: {", ".join(missing)}'
+            }
+        
+        # Filter to only include data from the report date (last day of month)
+        df['Date'] = pd.to_datetime(df['Date'])
+        report_date_dt = pd.to_datetime(report_date)
+        df = df[df['Date'] == report_date_dt]
+        
+        if len(df) == 0:
+            return {
+                'success': False,
+                'error': f'No data found for {report_date}. Check that the data file contains entries for this date.'
             }
         
         results = []
